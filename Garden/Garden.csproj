@@ -5,6 +5,23 @@
     <UserSecretsId>aspnet-Garden-929E4D0F-1224-4A12-8B9C-1AEC66246E0A</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180211132133_Initial.cs" />
+    <Compile Remove="Data\Migrations\20180211132133_Initial.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180211222129_Initial.cs" />
+    <Compile Remove="Data\Migrations\20180211222129_Initial.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180211222358_Initial.cs" />
+    <Compile Remove="Data\Migrations\20180211222358_Initial.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180211223133_Initial.cs" />
+    <Compile Remove="Data\Migrations\20180211223133_Initial.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180211223339_Initial.cs" />
+    <Compile Remove="Data\Migrations\20180211223339_Initial.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180211223656_Initial.cs" />
+    <Compile Remove="Data\Migrations\20180211223656_Initial.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180211224112_Initial.cs" />
+    <Compile Remove="Data\Migrations\20180211224112_Initial.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
