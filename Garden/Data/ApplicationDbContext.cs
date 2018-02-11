@@ -14,6 +14,8 @@ namespace Garden.Data
         public DbSet<PlantPhoto> Photos { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Offer> Offers { get; set; }
+        public DbSet<PlantType> PlantTypes { get; set; }
+        public DbSet<Parameter> Parameters { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
