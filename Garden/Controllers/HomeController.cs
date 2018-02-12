@@ -5,13 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Garden.Models;
+using Garden.Data;
 
 namespace Garden.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext _db;
+
+        public HomeController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
+
         public IActionResult Index()
         {
+
             return View();
         }
 
