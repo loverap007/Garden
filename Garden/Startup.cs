@@ -69,6 +69,11 @@ namespace Garden
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "library",
+                    template: "library/{category?}",
+                    defaults: new { controller = "Library", action = "GetAll" });
             });
         }
     }

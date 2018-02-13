@@ -1,0 +1,9 @@
+﻿@model List<string> 
+<h3 class="my-4">Доступные категории:</h3>
+<div class="list-group">
+    @foreach (var category in Model)
+    {
+        <a href="#" class="list-group-item">@category</a>
+    }
+</div>
+
