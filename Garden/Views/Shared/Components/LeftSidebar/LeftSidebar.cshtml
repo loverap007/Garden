@@ -3,7 +3,8 @@
 <div class="list-group">
     @foreach (var category in Model)
     {
-        <a href="#" class="list-group-item">@category</a>
+        <a asp-route="library"
+           asp-route-category="@category" class="list-group-item">@category</a>
     }
 </div>
 
