@@ -9,6 +9,11 @@ namespace Garden.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(100, ErrorMessage = "Can not be more then 100 symbols")]
+        [Display(Name = "FIO")]
+        public string Username { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

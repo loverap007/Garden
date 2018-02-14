@@ -21,17 +21,26 @@
         <div class="row">
             @foreach (var plant in Model)
             {
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/1920x1080" alt="">
+                        <div class="caption">
+                            <h4>
+                                <a asp-route="plant" asp-route-id="@plant.Id">@plant.Title</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            }
             <div class="col-sm-4 col-lg-4 col-md-4">
                 <div class="thumbnail">
-                    <img src="http://placehold.it/455x566" alt="">
+                    <img src="http://placehold.it/1920x500" alt="">
                     <div class="caption">
-                        <h4>
-                            <a asp-route="plant" asp-route-id="@plant.Id">@plant.Title</a>
+                        <h4>dfgdfgdfg
                         </h4>
                     </div>
                 </div>
             </div>
-            }
         </div>
     </div>
 </div>
