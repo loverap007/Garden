@@ -8,7 +8,6 @@ namespace Garden.Models
 
         public string MimeType { get; set; }
 
-        [MaxLength]
-        public byte[] File { get; set; }
+        public string PathToFile { get; set; }
     }
 }

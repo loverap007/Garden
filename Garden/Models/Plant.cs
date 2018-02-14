@@ -12,6 +12,8 @@ namespace Garden.Models
 
         public string Description { get; set; }
 
+        public string PathToAvatar { get; set; }
+
         public List<PlantPhoto> Photos { get; set; }
 
         public int PlantTypeId { get; set; }
