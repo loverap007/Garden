@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Garden.Models
@@ -14,6 +13,8 @@ namespace Garden.Models
 
         [Required]
         public int Count { get; set; }
+
+        public string Message { get; set; }
 
         public DateTime Created { get; set; }
     }

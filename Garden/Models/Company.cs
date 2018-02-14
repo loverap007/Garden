@@ -14,6 +14,8 @@ namespace Garden.Models
         [StringLength(200, ErrorMessage = "Описание не может быть длиннее 200 символов")]
         public string Description { get; set; }
 
+        public string Avatar { get; set; }
+
         public bool Confirmed { get; set; }
 
         public string UserId { get; set; }

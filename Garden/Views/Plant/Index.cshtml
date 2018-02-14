@@ -63,8 +63,11 @@
                 </div>
         </div>
         <div id="offers" class="tab-pane fade">
-            <h3>Menu 2</h3>
-            <p>Some content 2.</p>
+            @foreach(var offer in Model.Offers)
+            {
+                <p>@offer.Count</p>
+
+            }
         </div>
     </div>
     </div>

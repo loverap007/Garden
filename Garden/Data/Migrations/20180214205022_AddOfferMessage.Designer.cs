@@ -11,9 +11,10 @@ using System;
 namespace Garden.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180214205022_AddOfferMessage")]
+    partial class AddOfferMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,8 +76,6 @@ namespace Garden.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Avatar");
 
                     b.Property<bool>("Confirmed")
                         .ValueGeneratedOnAdd()
@@ -178,7 +177,11 @@ namespace Garden.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("PathToPhoto");
+                    b.Property<string>("FileName");
+
+                    b.Property<string>("MimeType");
+
+                    b.Property<string>("PathToFile");
 
                     b.Property<int?>("PlantId");
 
