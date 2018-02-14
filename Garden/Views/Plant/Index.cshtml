@@ -1,0 +1,61 @@
+﻿@model PlantViewModel
+
+@{
+    ViewData["Title"] = ViewBag.Title;
+}
+
+<div class="row">
+    <div class="col-lg-3">
+        @await Component.InvokeAsync("LeftSidebar")
+    </div>
+    <div class="col-lg-9">
+        <br />
+        <h2>@Model.Plant.Title</h2>
+
+    <div class="row">
+        <div class="center-block">
+            <div class="center-block">
+                <img src="http://placehold.it/455x566" alt="Lights" class="center-block" style="width:60%; max-height: 400px">
+            </div>
+        </div>
+    </div>
+
+    <p>@Model.Plant.Description</p>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#parameters">Параметры</a></li>
+        <li><a data-toggle="tab" href="#photos">Фотоальбом</a></li>
+        <li><a data-toggle="tab" href="#offers">Предложения</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="parameters" class="tab-pane fade in active">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Значение</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var parameter in Model.Parameters)
+                    {
+                    <tr>
+                        <td>@parameter.Name</td>
+                        <td>@parameter.Value</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="photos" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Some content 1.</p>
+        </div>
+        <div id="offers" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Some content 2.</p>
+        </div>
+    </div>
+    </div>
+</div>

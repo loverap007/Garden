@@ -28,9 +28,21 @@ namespace Garden.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult WithFilters()
+        public IActionResult WithFilters(string category)
         {
             return null;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult LoadMore(string category, int count)
+        {
+            var plants = _db.Plants
+                .Where(plant => plant.PlantType.Name == category)
+                .Skip(count)
+                .Take(12)
+                .ToList();
+            return Json(plants);
         }
     }
 }

@@ -74,6 +74,11 @@ namespace Garden
                     name: "library",
                     template: "Library",
                     defaults: new { controller = "Library", action = "GetFirst" });
+
+                routes.MapRoute(
+                    name: "plant",
+                    template: "Plant",
+                    defaults: new { controller = "Plant", action = "GetPlant" });
             });
         }
     }
