@@ -1,0 +1,63 @@
+﻿@model CreateCompanyViewModel
+
+    @{
+    ViewData["Title"] = "CompaniesManagment";
+    ViewData.AddActivePage(ManageNavPages.CompaniesManagment);
+    }
+
+    <h2>Управление компаниями</h2>
+    <h4>Добавить компанию:</h4>
+
+    <form asp-action="CreateCompany" asp-controller="Manage" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="uploadedFile">Загрузить аватар:</label>
+            <input type="file" name="File" id="File "/><br>
+        </div>
+        <button type="submit" class="btn btn-success">Добавить</button>
+    </form>
+    <br /><hr />
+    <h4>Мои компании:</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Подтверждение</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var company in ViewBag.Companies) {
+            <tr>
+                <td>@company.Title</td>
+                <td>@company.Description</td>
+                <td>
+                    <div class="checkbox disabled">
+                        @if (company.Confirmed) {
+                            <label><input type="checkbox" value="" checked disabled></label>
+                        }
+                        else 
+                        {
+                            <label><input type="checkbox" value="" disabled></label>
+                        }
+                    </div>
+                    </td>
+                <td>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Manage"
+                       asp-action="DeleteCompany" method="Delete" asp-route-id="@company.Id">Удалить</a>
+                </td>
+            </tr>
+}
+        </tbody>
+    </table>

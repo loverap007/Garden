@@ -42,6 +42,7 @@ namespace Garden
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IFileKeeper, FileKeeper>();
 
             services.AddMvc();
         }

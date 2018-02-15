@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Garden.Data;
 using Garden.Models;
 using Garden.Models.ManageViewModels;
 using Garden.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace Garden.Controllers
 {
@@ -22,6 +24,9 @@ namespace Garden.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _db;
+        private readonly IFileKeeper _fileKeeper;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
@@ -32,12 +37,18 @@ namespace Garden.Controllers
         public ManageController(
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
+          RoleManager<IdentityRole> roleManager,
+          ApplicationDbContext dbContext,
+          IFileKeeper fileKeeper,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
+            _db = dbContext;
+            _fileKeeper = fileKeeper;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
@@ -489,6 +500,36 @@ namespace Garden.Controllers
             var model = new ShowRecoveryCodesViewModel { RecoveryCodes = recoveryCodes.ToArray() };
 
             return View(nameof(ShowRecoveryCodes), model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CompaniesManagment()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            ViewBag.Companies = _db.Companies.Where(company => company.UserId == user.Id).ToList();
+            return View(nameof(CompaniesManagment));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteCompany(int id)
+        {
+            _db.Companies.Remove(_db.Companies.Find(id));
+            _db.SaveChanges();
+            return RedirectToAction(nameof(CompaniesManagment));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCompany(CreateCompanyViewModel model)
+        {
+            var company = new Company();
+            company.Title = model.Title;
+            company.Description = model.Description;
+            company.Avatar = await _fileKeeper.KeepFileAsync("/Files", model.File.FileName, model.File);
+            var user = await _userManager.GetUserAsync(User);
+            company.UserId = user.Id;
+            _db.Companies.Add(company);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(CompaniesManagment));
         }
 
         #region Helpers

@@ -59,7 +59,7 @@ namespace Garden.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(model.Email);
+                var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user != null)
                 {
                     if (!await _userManager.IsEmailConfirmedAsync(user))

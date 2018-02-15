@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Garden.Services
 {
-    interface IFileKeeper
+    public interface IFileKeeper
     {
         Task<string> KeepFileAsync(string path, string filename, IFormFile file);
     }
