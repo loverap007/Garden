@@ -41,7 +41,7 @@ namespace Garden.Controllers
                 .Where(plant => plant.PlantType.Name == category)
                 .Skip(count)
                 .Take(12)
-                .ToList();
+                .ToArray();
             return Json(plants);
         }
     }

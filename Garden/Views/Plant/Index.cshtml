@@ -63,10 +63,29 @@
                 </div>
         </div>
         <div id="offers" class="tab-pane fade">
-            @foreach(var offer in Model.Offers)
+            <br/>
+            @foreach (var offer in Model.Offers)
             {
-                <p>@offer.Count</p>
-
+                <div class="media">
+                    <div class="media-left media-top">
+                        <img src="https://unsplash.it/600.jpg?image=251" class="media-object" style="width:80px">
+                    </div>
+                    <div class="media-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">@offer.Company.Title</div>
+                            <div class="panel-body">
+                                <p>@offer.Company.Description</p>
+                                <p>@offer.Message</p>
+                                <p>Количество : @offer.Count</p>
+                            </div>
+                            <div class="panel-footer">
+                                <a href="#" class="btn btn-success" role="button">Ответить на предложение</a>
+                                <p>Дата создания предложения: @offer.Created</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
             }
         </div>
     </div>

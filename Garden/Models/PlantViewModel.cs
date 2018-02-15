@@ -14,5 +14,7 @@ namespace Garden.Models
         public List<Parameter> Parameters { get; set; }
 
         public List<Offer> Offers { get; set; }
+
+        public List<Company> Companies { get; set; }
     }
 }

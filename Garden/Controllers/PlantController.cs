@@ -26,6 +26,10 @@ namespace Garden.Controllers
             plantFull.PlantPhotos = _db.Photos.Where(photo => photo.PlantId == id).ToList();
             plantFull.Parameters = _db.Parameters.Where(parameter => parameter.PlantId == id).ToList();
             plantFull.Offers = _db.Offers.Where(offer => offer.PlantId == id && offer.Company.Confirmed).OrderBy(offer => offer.Created).ToList();
+            foreach(var offer in plantFull.Offers)
+            {
+                offer.Company = _db.Companies.Where(company => company.Id == offer.CompanyId).First();
+            }
             ViewBag.Title = plant.Title;
             return View("Index", plantFull);
         }

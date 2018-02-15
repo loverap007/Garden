@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Garden.Models
+﻿namespace Garden.Models
 {
     public class PlantPhoto : AModel
     {
