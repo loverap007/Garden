@@ -6,5 +6,7 @@ namespace Garden.Services
     public interface IFileKeeper
     {
         Task<string> KeepFileAsync(string path, string filename, IFormFile file);
+
+        Task DeleteFileAsync(string path);
     }
 }

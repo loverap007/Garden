@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Files\**" />
+    <Content Remove="wwwroot\Files\**" />
+    <EmbeddedResource Remove="wwwroot\Files\**" />
+    <None Remove="wwwroot\Files\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Data\Migrations\20180211132133_Initial.cs" />
     <Compile Remove="Data\Migrations\20180211132133_Initial.Designer.cs" />
     <Compile Remove="Data\Migrations\20180211222129_Initial.cs" />
@@ -38,7 +45,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\CompanyAvatars\" />
-    <Folder Include="wwwroot\Files\" />
   </ItemGroup>
 
 </Project>

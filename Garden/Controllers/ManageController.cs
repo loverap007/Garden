@@ -513,18 +513,24 @@ namespace Garden.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteCompany(int id)
         {
-            _db.Companies.Remove(_db.Companies.Find(id));
+            var company = _db.Companies.Find(id);
+            if (company.Avatar != null)
+            {
+                await _fileKeeper.DeleteFileAsync(company.Avatar);
+            }
+            _db.Companies.Remove(company);
             _db.SaveChanges();
             return RedirectToAction(nameof(CompaniesManagment));
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateCompany(CreateCompanyViewModel model)
         {
             var company = new Company();
             company.Title = model.Title;
             company.Description = model.Description;
-            company.Avatar = await _fileKeeper.KeepFileAsync("/Files", model.File.FileName, model.File);
+            company.Avatar = await _fileKeeper.KeepFileAsync("/images/CompanyAvatars", model.File.FileName, model.File);
             var user = await _userManager.GetUserAsync(User);
             company.UserId = user.Id;
             _db.Companies.Add(company);
