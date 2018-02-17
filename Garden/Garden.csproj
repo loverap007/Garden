@@ -45,6 +45,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\CompanyAvatars\" />
+    <Folder Include="wwwroot\images\PlantPhotos\" />
   </ItemGroup>
 
 </Project>

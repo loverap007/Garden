@@ -56,13 +56,29 @@
                     </div>
                 </td>
                 <td>
-                    <a class="btn btn-danger" asp-area="" asp-controller="Manage"
-                       asp-action="DeleteCompany" asp-route-id="@company.Id">Удалить</a>
+                    <button type="button" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-modal" btn-data="@company.Id">Удалить</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<div id="confirm-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Вы действительно хотите удалить все данные?</h4>
+            </div>
+            <div class="modal-body">
+                <p>Удаление компании повлечет за собой удаление всех существующих, закрепленных за этой компанией, предложений.</p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-danger" id="btn-confirm" href="">Удалить</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
