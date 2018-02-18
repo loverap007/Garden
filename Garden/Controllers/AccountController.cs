@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Garden.Models;
 using Garden.Models.AccountViewModels;
 using Garden.Services;
+using Garden.Data;
 
 namespace Garden.Controllers
 {
@@ -24,17 +25,20 @@ namespace Garden.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private ApplicationDbContext _db;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
+            ApplicationDbContext db,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _db = db;
         }
 
         [TempData]
@@ -446,6 +450,14 @@ namespace Garden.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetCompanies()
+        {
+            var userId = _userManager.GetUserId(User);
+            var companies = _db.Companies.Where(company => company.UserId == userId && company.Confirmed).ToArray();
+            return Json(companies);
         }
 
         #region Helpers

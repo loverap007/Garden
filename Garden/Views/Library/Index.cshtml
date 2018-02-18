@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Library";
 }
-<div class="count" hidden>@Model.Count</div>
+<div id="count" hidden>@Model.Count</div>
 
 <div class="row">
     <div class="col-lg-3">
@@ -12,7 +12,7 @@
     <div class="col-lg-9">
         <br />
         <div class="jumbotron">
-            <h1>@ViewBag.Category</h1>
+            <h1 id="category">@ViewBag.Category</h1>
             @if (Model.Count == 0)
             {
                 <p>Ничего не найдено</p>
@@ -35,3 +35,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/get_plants.js"></script>
+}

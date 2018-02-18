@@ -1,4 +1,5 @@
 ﻿@model PlantViewModel
+@inject SignInManager<ApplicationUser> SignInManager
 
 @{
     ViewData["Title"] = ViewBag.Title;
@@ -12,82 +13,106 @@
         <br />
         <h2>@Model.Plant.Title</h2>
 
-    <div class="row">
-        <div class="center-block">
+        <div class="row">
             <div class="center-block">
-                <img src="http://placehold.it/1920x1080" alt="Lights" class="center-block" style="width:60%; max-height: 400px">
+                <div class="center-block">
+                    <img src="http://placehold.it/1920x1080" alt="Lights" class="center-block" style="width:60%; max-height: 400px">
+                </div>
+            </div>
+        </div>
+
+        <p>@Model.Plant.Description</p>
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#parameters">Параметры</a></li>
+            <li><a data-toggle="tab" href="#photos">Фотоальбом</a></li>
+            <li><a data-toggle="tab" href="#offers">Предложения</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="parameters" class="tab-pane fade in active">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Значение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var parameter in Model.Parameters)
+                        {
+                            <tr>
+                                <td>@parameter.Name</td>
+                                <td>@parameter.Value</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div id="photos" class="tab-pane fade">
+                <div class="row justify-content-center">
+                    <div class="row">
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <div class="thumbnail col-sm-4">
+                                <a href="https://unsplash.it/1200/768.jpg?image=251" data-toggle="lightbox" data-gallery="example-gallery">
+                                    <img src="https://unsplash.it/600.jpg?image=251" class="img-fluid">
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div id="offers" class="tab-pane fade">
+                <br />
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    if (ViewBag.UserCompaniesCount == 0)
+                    {
+                        <p>Для того, чтобы оставлять свои предложения, необходимо <a asp-area="" asp-controller="Manage" asp-action="CompaniesManagment">добавить компанию в личном кабинете</a>.
+                                После подтверждения компании администратором, вы сможете разместить сдесь свое предложение.</p>
+                    }
+                    else
+                    {
+                        <a id="new-offer" class="btn btn-success" asp-area="" asp-controller="Account" asp-action="GetCompanies" data-ajax="true" data-ajax-method="GET" data-ajax-complete="offerFormCreate">Добавить предложение</a>
+                    }
+                }
+                else
+                {
+                    <p>Для того, чтобы оставлять собственные предложения, необходима <a asp-area="" asp-controller="Account" asp-action="Login">авторизация</a>.</p>
+                }
+                <div id="new-offer-conteiner">
+
+                </div>
+                <br/>
+                    @foreach (var offer in Model.Offers)
+                    {
+                        <div class="media">
+                            <div class="media-left media-top">
+                                <img src="https://unsplash.it/600.jpg?image=251" class="media-object" style="width:80px">
+                            </div>
+                            <div class="media-body">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">@offer.Company.Title</div>
+                                    <div class="panel-body">
+                                        <p>@offer.Company.Description</p>
+                                        <p>@offer.Message</p>
+                                        <p>Количество : @offer.Count</p>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <a href="#" class="btn btn-success" role="button">Ответить на предложение</a>
+                                        <p>Дата создания предложения: @offer.Created</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    }
             </div>
         </div>
     </div>
-
-    <p>@Model.Plant.Description</p>
-
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#parameters">Параметры</a></li>
-        <li><a data-toggle="tab" href="#photos">Фотоальбом</a></li>
-        <li><a data-toggle="tab" href="#offers">Предложения</a></li>
-    </ul>
-
-    <div class="tab-content">
-        <div id="parameters" class="tab-pane fade in active">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Параметр</th>
-                        <th>Значение</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach(var parameter in Model.Parameters)
-                    {
-                    <tr>
-                        <td>@parameter.Name</td>
-                        <td>@parameter.Value</td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div id="photos" class="tab-pane fade">
-                <div class="row justify-content-center">
-                        <div class="row">
-                            @for (int i = 0; i < 5; i++)
-                            {
-                                <div class="thumbnail col-sm-4">
-                                    <a href="https://unsplash.it/1200/768.jpg?image=251" data-toggle="lightbox" data-gallery="example-gallery">
-                                        <img src="https://unsplash.it/600.jpg?image=251" class="img-fluid">
-                                    </a>
-                                </div>
-                            }   
-                        </div>
-                </div>
-        </div>
-        <div id="offers" class="tab-pane fade">
-            <br/>
-            @foreach (var offer in Model.Offers)
-            {
-                <div class="media">
-                    <div class="media-left media-top">
-                        <img src="https://unsplash.it/600.jpg?image=251" class="media-object" style="width:80px">
-                    </div>
-                    <div class="media-body">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">@offer.Company.Title</div>
-                            <div class="panel-body">
-                                <p>@offer.Company.Description</p>
-                                <p>@offer.Message</p>
-                                <p>Количество : @offer.Count</p>
-                            </div>
-                            <div class="panel-footer">
-                                <a href="#" class="btn btn-success" role="button">Ответить на предложение</a>
-                                <p>Дата создания предложения: @offer.Created</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            }
-        </div>
-    </div>
-    </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/offerFormCreate.js"></script>
+}

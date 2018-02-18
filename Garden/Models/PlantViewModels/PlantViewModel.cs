@@ -8,7 +8,7 @@ namespace Garden.Models
     public class PlantViewModel
     {
         public Plant Plant { get; set; }
-        
+
         public List<PlantPhoto> PlantPhotos { get; set; }
 
         public List<Parameter> Parameters { get; set; }
