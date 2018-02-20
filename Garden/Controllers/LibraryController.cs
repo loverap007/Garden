@@ -7,6 +7,7 @@ namespace Garden.Controllers
 {
     public class LibraryController : Controller
     {
+        int plantPerLoadCount = 12;
         ApplicationDbContext _db;
 
         public LibraryController(ApplicationDbContext db)
@@ -21,7 +22,7 @@ namespace Garden.Controllers
             ViewBag.Category = category;
             var plants = _db.Plants
                 .Where(plant => plant.PlantType.Name == category)
-                .Take(12)
+                .Take(plantPerLoadCount)
                 .ToList();
             return View("Index", plants);
         }
@@ -40,7 +41,7 @@ namespace Garden.Controllers
             var plants = _db.Plants
                 .Where(plant => plant.PlantType.Name == category)
                 .Skip(count)
-                .Take(12)
+                .Take(plantPerLoadCount)
                 .ToArray();
             return Json(plants);
         }

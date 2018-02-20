@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Library";
 }
-<div id="count" hidden>@Model.Count</div>
 
 <div class="row">
     <div class="col-lg-3">
@@ -18,7 +17,7 @@
                 <p>Ничего не найдено</p>
             }
         </div>
-        <div class="row">
+        <div id="plants" class="row">
             @foreach (var plant in Model)
             {
                 <div class="col-sm-4 col-lg-4 col-md-4">
