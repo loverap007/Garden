@@ -81,15 +81,46 @@
                 {
                     <p>Для того, чтобы оставлять собственные предложения, необходима <a asp-area="" asp-controller="Account" asp-action="Login">авторизация</a>.</p>
                 }
-                <div id="new-offer-conteiner">
-
+                <div id="new-offer-conteiner" hidden>
+                    <br />
+                    <form asp-area="" asp-controller="Plant" asp-action="AddOffer" asp-route-id="@Model.Plant.Id" method="post">
+                    <div class="media">
+                        <div class="media-left media-top">
+                            <img id="new-offer-img" src="" class="media-object" style="width:80px">
+                        </div>
+                        <div class="media-body">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <label for="company-select">Выберите компанию: </label>
+                                    <select class="form-control" id="company-select" name="companyId" onchange="onCompanyChange()">
+                                    </select>
+                                </div>
+                                <div class="panel-body">
+                                    <p id="new-offer-company-title"></p>
+                                    <div class="form-group">
+                                        <label for="new-offer-message">Текст предложения:</label>
+                                        <input class="form-control" type="text" id="new-offer-message" name="message" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-offer-count">Количество товара:</label>
+                                        <input class="form-control" type="number" id="new-offer-count" name="count" required/>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <button type="submit" class="btn btn-success">Разместить</button>
+                                        <button type="button" class="btn btn-default" onclick="cancelButton()">Отмена</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
                 </div>
                 <br/>
                     @foreach (var offer in Model.Offers)
                     {
                         <div class="media">
                             <div class="media-left media-top">
-                                <img src="https://unsplash.it/600.jpg?image=251" class="media-object" style="width:80px">
+                                <img src="@offer.Company.Avatar" class="media-object" style="width:80px">
                             </div>
                             <div class="media-body">
                                 <div class="panel panel-default">
