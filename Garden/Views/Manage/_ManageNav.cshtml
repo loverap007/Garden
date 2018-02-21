@@ -13,5 +13,9 @@
     <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a asp-action="ChangePassword">Сменить пароль</a></li>
     <li class="@ManageNavPages.CompaniesManagmentNavClass(ViewContext)"><a asp-action="CompaniesManagment">Управление компаниями</a></li>
     <li class="@ManageNavPages.OffersNavClass(ViewContext)"><a asp-action="Offers">Управление предложениями</a></li>
+    @if (await SignInManager.UserManager.IsInRoleAsync(await SignInManager.UserManager.GetUserAsync(User), "Admin"))
+    {
+        <li><a asp-controller="Admin" asp-action="Index">Панель администратора</a></li>
+    }
 </ul>
 

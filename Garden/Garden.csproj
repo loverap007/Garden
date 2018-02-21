@@ -6,9 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Новая папка\**" />
     <Compile Remove="wwwroot\Files\**" />
+    <Content Remove="Views\Новая папка\**" />
     <Content Remove="wwwroot\Files\**" />
+    <EmbeddedResource Remove="Views\Новая папка\**" />
     <EmbeddedResource Remove="wwwroot\Files\**" />
+    <None Remove="Views\Новая папка\**" />
     <None Remove="wwwroot\Files\**" />
   </ItemGroup>
 

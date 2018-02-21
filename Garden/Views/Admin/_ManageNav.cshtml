@@ -1,0 +1,11 @@
+﻿@using Garden.Views.Admin
+
+
+<ul class="nav nav-pills nav-stacked">
+    <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">Управление пользователями</a></li>
+    <li class="@ManageNavPages.OffersNavClass(ViewContext)"><a asp-action="Offers">Управление компаниями</a></li>
+    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a asp-action="ChangePassword">Добавить категорию</a></li>
+    <li class="@ManageNavPages.CompaniesManagmentNavClass(ViewContext)"><a asp-action="CompaniesManagment">Добавить товар</a></li>
+    <li class="@ManageNavPages.OffersNavClass(ViewContext)"><a asp-action="Offers">Редактировать товары</a></li>
+</ul>
+
