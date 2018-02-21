@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -75,6 +76,7 @@ namespace Garden.Controllers
         public async Task<IActionResult> ChangeRole(string id)
         {
             var user = _db.Users.First(usr => usr.Id == id);
+            user.SecurityStamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
             var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
             if (isAdmin) await _userManager.RemoveFromRoleAsync(user, "Admin");
             else await _userManager.AddToRoleAsync(user, "Admin");
