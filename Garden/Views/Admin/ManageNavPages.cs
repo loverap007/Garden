@@ -14,9 +14,9 @@ namespace Garden.Views.Admin
 
         public static string ExternalLogins => "ExternalLogins";
 
-        public static string TwoFactorAuthentication => "TwoFactorAuthentication";
+        public static string Categories => "Categories";
 
-        public static string CompaniesManagment => "CompaniesManagment";
+        public static string Companies => "Companies";
 
         public static string Offers => "Offers";
 
@@ -26,9 +26,9 @@ namespace Garden.Views.Admin
 
         public static string ExternalLoginsNavClass(ViewContext viewContext) => PageNavClass(viewContext, ExternalLogins);
 
-        public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
+        public static string CategoriesNavClass(ViewContext viewContext) => PageNavClass(viewContext, Categories);
 
-        public static string CompaniesManagmentNavClass(ViewContext viewContext) => PageNavClass(viewContext, CompaniesManagment);
+        public static string CompaniesNavClass(ViewContext viewContext) => PageNavClass(viewContext, Companies);
 
         public static string OffersNavClass(ViewContext viewContext) => PageNavClass(viewContext, Offers);
 

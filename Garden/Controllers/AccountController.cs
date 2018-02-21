@@ -238,7 +238,7 @@ namespace Garden.Controllers
                     var callbackUrl = Url.Action(
                                     "ConfirmEmail",
                                     "Account",
-                                    new { userId = user.Id, code = code },
+                                    new { userId = user.Id, code },
                                     protocol: HttpContext.Request.Scheme);
                     await _emailSender.SendEmailAsync(model.Email, "Подтверждение регистрации",
                         $"Подтвердите регистрацию, перейдя по <a href='{callbackUrl}'>ссылке</a>:");

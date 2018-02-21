@@ -82,5 +82,67 @@ namespace Garden.Controllers
             else await _userManager.AddToRoleAsync(user, "Admin");
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Companies()
+        {
+            var companies = _db.Companies.OrderBy(company => company.Confirmed).ToList();
+            return View(companies);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteCompany(int id)
+        {
+            var company = await _db.Companies.FindAsync(id);
+            _db.Companies.Remove(company);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Companies));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmCompany(int id)
+        {
+            var company = await _db.Companies.FindAsync(id);
+            var owner = _db.Users.FindAsync(company.UserId);
+            company.Confirmed = true;
+            _db.Companies.Update(company);
+            var manageUrl = Url.Action(
+                "CompaniesManagment",
+                "Manage",
+                new { });
+            await _emailSender.SendEmailAsync((await owner).Email, "Подтверждение",
+                $"Ваша компания прошла модерацию. Просматривать и управлять своими компаниями можно на <a href='{manageUrl}'>этой</a> странице.");
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Companies));
+        }
+
+        [HttpGet]
+        public IActionResult Categories()
+        {
+            ViewBag.Categories = _db.PlantTypes.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddCategory(CategoryViewModel model)
+        {
+            var plantType = new PlantType()
+            {
+                Name = model.Title
+            };
+            _db.PlantTypes.Add(plantType);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Categories));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var category = await _db.PlantTypes.FindAsync(id);
+            _db.PlantTypes.Remove(category);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Categories));
+        }
     }
 }
