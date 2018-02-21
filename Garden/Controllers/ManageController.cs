@@ -527,15 +527,38 @@ namespace Garden.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateCompany(CreateCompanyViewModel model)
         {
-            var company = new Company();
-            company.Title = model.Title;
-            company.Description = model.Description;
-            company.Avatar = await _fileKeeper.KeepFileAsync("/images/CompanyAvatars", model.File.FileName, model.File);
             var user = await _userManager.GetUserAsync(User);
-            company.UserId = user.Id;
+            var company = new Company
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Avatar = await _fileKeeper.KeepFileAsync("/images/CompanyAvatars", model.File.FileName, model.File),
+                UserId = user.Id
+            };
             _db.Companies.Add(company);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(CompaniesManagment));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Offers()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var offers = _db.Offers.Where(offer => offer.Company.UserId == user.Id).ToList();
+            foreach(var offer in offers)
+            {
+                offer.Plant = _db.Plants.FirstOrDefault(plant => plant.Id == offer.PlantId);
+            }
+            return View(offers);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteOffer(int id)
+        {
+            var offer = _db.Offers.Find(id);
+            _db.Offers.Remove(offer);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Offers));
         }
 
         #region Helpers

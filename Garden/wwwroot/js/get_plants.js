@@ -22,7 +22,7 @@ function onSuccess(data) {
         container.append("<div class=\"col-sm-4 col-lg-4 col-md-4\"><div class=\"thumbnail\">" +
             "<img src=\"" + "http://placehold.it/1920x1080" + "\" alt=\"\">" +
             "<div class=\"caption\"><h4>" +
-            "<a asp-route=\"plant\" asp-route-id=\"" + item.id + "\">" + item.title + "</a>" +
+            "<a href=\"/Plant?id=" + item.id + "\">" + item.title + "</a>" +
             "</h4 ></div ></div ></div > ")
     });
     count = count + data.length;

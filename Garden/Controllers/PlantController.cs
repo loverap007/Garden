@@ -50,14 +50,16 @@ namespace Garden.Controllers
         [HttpPost]
         public IActionResult AddOffer(int id)
         {
-            var offer = new Offer();
-            offer.CompanyId = Int32.Parse(Request.Form.FirstOrDefault(p => p.Key == "companyId").Value);
-            offer.PlantId = id;
-            offer.Message = Request.Form.FirstOrDefault(p => p.Key == "message").Value;
-            offer.Count = Int32.Parse(Request.Form.FirstOrDefault(p => p.Key == "count").Value);
+            var offer = new Offer
+            {
+                CompanyId = Int32.Parse(Request.Form.FirstOrDefault(p => p.Key == "companyId").Value),
+                PlantId = id,
+                Message = Request.Form.FirstOrDefault(p => p.Key == "message").Value,
+                Count = Int32.Parse(Request.Form.FirstOrDefault(p => p.Key == "count").Value)
+            };
             _db.Offers.Add(offer);
             _db.SaveChanges();
-            return LocalRedirect("/Plant?id=" + id);
+            return RedirectToRoute("plant", new { id });
         }
     }
 }

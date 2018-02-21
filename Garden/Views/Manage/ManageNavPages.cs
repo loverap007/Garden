@@ -21,6 +21,8 @@ namespace Garden.Views.Manage
 
         public static string CompaniesManagment => "CompaniesManagment";
 
+        public static string Offers => "Offers";
+
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
@@ -30,6 +32,8 @@ namespace Garden.Views.Manage
         public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
 
         public static string CompaniesManagmentNavClass(ViewContext viewContext) => PageNavClass(viewContext, CompaniesManagment);
+
+        public static string OffersNavClass(ViewContext viewContext) => PageNavClass(viewContext, Offers);
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {
