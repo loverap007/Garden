@@ -1,0 +1,45 @@
+﻿@model AddPlantViewModel
+@{
+    ViewData["Title"] = "Добавить растение";
+    ViewData.AddActivePage(ManageNavPages.AddPlant);
+}
+
+<h4>Добавить растение:</h4>
+<form id="addPhotoForm" enctype="multipart/form-data" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="category-select">Категория: </label>
+        <select class="form-control" id="category-select" name="Type">
+            @foreach (var category in ViewBag.Categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input type="text" asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <div class="dropzone" id="my-dropzone" name="mainFileUploader">
+            <div class="fallback">
+                <input name="file" type="file" multiple />
+            </div>
+        </div>
+    </div>
+    <button type="button" id="submit-all" class="btn btn-success">Добавить</button>
+    <button type="reset" id="reset" class="btn btn-warning">Сбросить</button>
+</form>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="~/lib/dropzone/dropzone.js"></script>
+    <script src="~/js/dropzone-setup.js"></script>
+}

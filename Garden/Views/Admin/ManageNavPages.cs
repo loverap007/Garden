@@ -12,7 +12,7 @@ namespace Garden.Views.Admin
 
         public static string ChangePassword => "ChangePassword";
 
-        public static string ExternalLogins => "ExternalLogins";
+        public static string AddPlant => "AddPlant";
 
         public static string Categories => "Categories";
 
@@ -24,7 +24,7 @@ namespace Garden.Views.Admin
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
 
-        public static string ExternalLoginsNavClass(ViewContext viewContext) => PageNavClass(viewContext, ExternalLogins);
+        public static string AddPlantNavClass(ViewContext viewContext) => PageNavClass(viewContext, AddPlant);
 
         public static string CategoriesNavClass(ViewContext viewContext) => PageNavClass(viewContext, Categories);
 

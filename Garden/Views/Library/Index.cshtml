@@ -22,7 +22,14 @@
             {
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
-                        <img src="http://placehold.it/1920x1080" alt="">
+                        @if (plant.Photos.Count == 0)
+                        {
+                            <img src="http://placehold.it/200x300" alt="" >
+                        }
+                        else
+                        {
+                            <img src="@plant.Photos[0].PathToPhoto" alt="" style="height: 300px">
+                        }
                         <div class="caption">
                             <h4>
                                 <a asp-route="plant" asp-route-id="@plant.Id">@plant.Title</a>

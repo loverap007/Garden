@@ -16,7 +16,14 @@
         <div class="row">
             <div class="center-block">
                 <div class="center-block">
-                    <img src="http://placehold.it/1920x1080" alt="Lights" class="center-block" style="width:60%; max-height: 400px">
+                    @if (Model.PlantPhotos.Count == 0)
+                    {
+                        <img src="http://placehold.it/1920x1080" alt="Lights" class="center-block" style="width:60%; max-height: 400px">
+                    }
+                    else
+                    {
+                        <img src="@Model.PlantPhotos[0].PathToPhoto" alt="Lights" class="center-block" style="width:60%; max-height: 400px">
+                    }
                 </div>
             </div>
         </div>
@@ -52,11 +59,11 @@
             <div id="photos" class="tab-pane fade">
                 <div class="row justify-content-center">
                     <div class="row">
-                        @for (int i = 0; i < 5; i++)
+                        @foreach (var photo in Model.PlantPhotos)
                         {
                             <div class="thumbnail col-sm-4">
-                                <a href="https://unsplash.it/1200/768.jpg?image=251" data-toggle="lightbox" data-gallery="example-gallery">
-                                    <img src="https://unsplash.it/600.jpg?image=251" class="img-fluid">
+                                <a href="@photo.PathToPhoto" data-toggle="lightbox" data-gallery="example-gallery">
+                                    <img src="@photo.PathToPhoto" class="img-fluid" style="height:300px">
                                 </a>
                             </div>
                         }

@@ -144,5 +144,35 @@ namespace Garden.Controllers
             _db.SaveChanges();
             return RedirectToAction(nameof(Categories));
         }
+
+        [HttpGet]
+        public IActionResult AddPlant()
+        {
+            ViewBag.Categories = _db.PlantTypes.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPlant(AddPlantViewModel model)
+        {
+            var plant = new Plant
+            {
+                Title = model.Name,
+                Description = model.Description,
+                PlantTypeId = model.Type
+            };
+            var plantId = _db.Plants.Add(plant).Entity.Id;
+            foreach(var photo in Request.Form.Files)
+            {
+                var plantPhoto = new PlantPhoto
+                {
+                    PlantId = plantId,
+                    PathToPhoto = await _fileKeeper.KeepFileAsync("/images/PlantPhotos/", photo.FileName, photo)
+                };
+                _db.Photos.Add(plantPhoto);
+            }
+            _db.SaveChanges();
+            return RedirectToAction(nameof(AddPlant));
+        }
     }
 }
