@@ -13,6 +13,7 @@
         var wrapperThis = this;
 
         resetButton.addEventListener("click", () => {
+            nicEditors.findEditor("Description").setContent("");
             wrapperThis.removeAllFiles();
         })
 
@@ -34,7 +35,7 @@
 
             formData.append("Name", $("#Name").val());
             formData.append("Type", $("#category-select").val());
-            formData.append("Description", $("#Description").val());
+            formData.append("Description", nicEditors.findEditor("Description").getContent());
         });
     }
 };
